@@ -13,16 +13,26 @@ const App = () => {
 
     const initState = { 
         message: "Działa",
-        time: new Date() 
+        time: new Date(),
+        usersList:[] 
     };
-    
+
+  
+
     const reducer = (state = initState, action) => {
         switch(action.type) {
             case'getCurrentTime':
      
-            return  {...state, time:new Date() }
-                      
+            return  {...state, time:new Date() };
+            case'addUser':
+            
+            return  {...state,  usersList:  [...state.usersList, action.payload.user] };         
+            case'removeUser':
+            const newList = state.usersList.filter(user => user.id !== action.payload.id) 
+            return  {...state,  usersList:  newList };     
+      
         }
+        
     return state}
     
 
@@ -37,7 +47,7 @@ window.__REDUX_DEVTOOLS_EXTENSION__    && window.__REDUX_DEVTOOLS_EXTENSION__()
              <Task01 />
              <Task02 /> 
              <Task03 /> 
-            {/* <Task04 /> */}
+             <Task04 />
             {/* <Task05 /> */}
             
        </Provider>
